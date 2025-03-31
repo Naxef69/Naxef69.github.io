@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Made Just For You</title>
+  <style>
+    /* General Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: black;
+      color: white;
+      overflow: hidden;
+    }
+
+    .page {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* Initial Page */
+    #initial-page {
+      background-image: url('https://i.imgur.com/6Eba23I.jpg');
+    }
+
+    .glowing-text {
+      font-size: 6rem;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      0% {
+        text-shadow: 0 0 5px white;
+      }
+      100% {
+        text-shadow: 0 0 20px white;
+      }
+    }
+
+    #reveal-button {
+      font-weight: bold;
+      padding: 10px 20px;
+      border: 2px solid white;
+      background: transparent;
+      color: white;
+      cursor: pointer;
+      margin-top: 80px;
+      font-size: 50px;
+    }
+
+    .small-picture-frame {
+      width: 500px;
+      height: 700px;
+      border: 2px solid white;
+      margin-top: 300px;
+    }
+
+    /* Slide 1: Music Slide */
+    #slide1 {
+      background-image: url('https://i.imgur.com/xLIn3iN.png');
+    }
+
+    #slide1 h2 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .emoji {
+      position: absolute;
+      font-size: 2rem;
+      opacity: 0.5;
+      animation: float 5s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translate(0, 0);
+      }
+      50% {
+        transform: translate(50px, 50px);
+      }
+    }
+
+    #music-button {
+      font-family: cursive;
+      padding: 20px 40px;
+      background: transparent;
+      border: 2px solid white;
+      color: white;
+      cursor: pointer;
+      font-size: 2rem;
+    }
+    
+    /* New Slide Before Birthday Messages */
+    #new-before-birthday {
+      background-image: url('https://i.imgur.com/d5f0TV4.jpeg');
+    }
+
+    /* Cake Page */
+    #cake-page {
+      background-image: url('https://i.imgur.com/2RI1WPR.jpeg');
+    }
+
+    #cake-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      margin-top:800px;
+    }
+    
+    .cake {
+      width: 300px;
+      height: 150px;
+      background: linear-gradient(to bottom, #f9c5d1, #f2a6c2);
+      border-radius: 10px 10px 0 0;
+      position: relative;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
+    .cake-bottom {
+      width: 350px;
+      height: 50px;
+      background: linear-gradient(to bottom, #e8a1b5, #d48aa0);
+      border-radius: 0 0 20px 20px;
+      margin-top: -10px;
+    }
+    
+    .candle {
+      width: 10px;
+      height: 60px;
+      background: linear-gradient(to bottom, #fff, #ddd);
+      position: absolute;
+      top: -60px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    .flame {
+      width: 15px;
+      height: 30px;
+      background: linear-gradient(to bottom, #ff7800, #ffec00);
+      border-radius: 50% 50% 20% 20%;
+      position: absolute;
+      top: -30px;
+      left: -2.5px;
+      box-shadow: 0 0 20px #ff7800, 0 0 40px #ffec00;
+      animation: flicker 1s infinite alternate;
+      opacity: 1;
+      transition: opacity 0.5s;
+    }
+    
+    .candle-off .flame {
+      opacity: 0;
+    }
+    
+    @keyframes flicker {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1, 0.9);
+      }
+    }
+    
+    .candle-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    
+    #birthday-message {
+      font-size: 3rem;
+      margin-top: 50px;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 1s;
+      font-family: cursive;
+      color: #ff69b4;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+    
+    .visible {
+      opacity: 1 !important;
+    }
+    
+    #cake-continue-btn {
+      margin-top: 30px;
+      padding: 15px 30px;
+      background: linear-gradient(to right, #ff69b4, #ff8c66);
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      border-radius: 30px;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 1s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    #cake-continue-btn:hover {
+      background: linear-gradient(to right, #ff8c66, #ff69b4);
+    }
+
+    /* Confetti styles */
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #f00;
+      opacity: 0;
+    }
+
+    /* Slide 2: Birthday Messages */
+    #slide2-1, #slide2-2, #slide2-3 {
+      background-image: url('https://i.imgur.com/L2oGmN2.jpg');
+    }
+
+    .typewriter1 {
+      font-size: 3rem;
+      overflow: hidden;
+      white-space: nowrap;
+      margin: 0 auto;
+      letter-spacing: 0.15em;
+      animation: typing 3.5s steps(40, end);
+      font-family: cursive;
+      color: red;
+    }
+
+    @keyframes typing {
+      from {
+        width: 0;
+      }
+      to {
+        width: 100%;
+      }
+    }
+
+    /* Slide 3: Wishes */
+    #slide3-1 {
+      background-image: url('https://i.imgur.com/X0ew46S.jpeg');
+      position: relative;
+      overflow: hidden;
+    }
+
+    #slide3-2 {
+      background-image: url('https://i.imgur.com/pwRsyLt.jpeg');
+    }
+
+    #slide3-3 {
+      background-image: url('https://i.imgur.com/Y72x5Dh.jpeg');
+    }
+
+    #slide3-4 {
+      background-image: url('https://i.imgur.com/Gjt9tKj.jpeg');
+    }
+
+    #slide3-5 {
+      background-image: url('https://i.imgur.com/S5EPnso.jpeg');
+    }
+
+    #slide3-6 {
+      background-image: url('https://i.imgur.com/GMqa59q.jpg');
+    }
+
+    .fade-in {
+      font-size: 2rem;
+      animation: fadeIn 2s;
+      color: white;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .next-btn {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      padding: 10px 20px;
+      background: white;
+      border: 2px solid white;
+      color: black;
+      cursor: pointer;
+      font-size: 25px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .next-btn:hover {
+      background-color: transparent;
+      color: gray;
+    }
+
+    /* Cherry Blossom Petals Animation */
+    .petal {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: pink;
+      border-radius: 100%;
+      opacity: 0.7;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-100%);
+      }
+      100% {
+        transform: translateY(100vh);
+      }
+    }
+
+    /* Things I Don't Like Section */
+    #dont-like-intro {
+      background-image: url('https://i.imgur.com/uz333wR.jpeg');
+    }
+    
+    #dont-like-1 {
+      background-image: url('https://i.imgur.com/093y739.jpeg');
+    }
+    
+    #dont-like-2 {
+      background-image: url('https://i.imgur.com/bQmcBhH.jpeg');
+    }
+    
+    #dont-like-3 {
+      background-image: url('https://i.imgur.com/aVG22cY.jpeg');
+    }
+    
+    #dont-like-4 {
+      background-image: url('https://i.imgur.com/5lGQQEp.jpeg');
+    }
+    
+    #dont-like-5 {
+      background-image: url('https://i.imgur.com/FS05wef.png');
+    }
+
+    .dont-like-text {
+      font-family: 'Helvetica', cursive, sans-serif;
+      font-size: 3rem;
+      text-align: center;
+      color: white;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+      margin-bottom: 30px;
+      font-weight: normal;
+      font-style: italic;
+      letter-spacing: 1px;
+      animation: fadeIn 2s;
+      line-height: 1.3;
+      max-width: 80%;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
+    }
+
+    /* Memory Intro Slide */
+    #memories-intro {
+      background-image: url('https://i.imgur.com/X0ew46S.jpeg');
+    }
+    
+    /* Beautiful cursive font for memory intro and memory5 */
+    .memory-intro-text {
+      font-family: 'Helvetica', cursive, sans-serif;
+      font-size: 4.5rem;
+      text-align: center;
+      color: white;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+      margin-bottom: 30px;
+      font-weight: normal;
+      font-style: italic;
+      letter-spacing: 1px;
+      animation: fadeIn 2s;
+      line-height: 1.3;
+    }
+    
+    .memory5-text {
+      font-family: 'Helvetica', cursive, sans-serif;
+      font-size: 4.5rem;
+      text-align: center;
+      color: white;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+      margin-bottom: 30px;
+      font-weight: normal;
+      font-style: italic;
+      letter-spacing: 1px;
+      animation: fadeIn 2s;
+      line-height: 1.3;
+    }
+
+    /* Memory Slides Styles */
+    .memory-content {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* Individual memory slide backgrounds */
+    #memory1 {
+      background-image: url('https://i.imgur.com/Cdbe4vV.jpeg');
+    }
+    #memory2 {
+      background-image: url('https://i.imgur.com/WWJ2AuY.jpeg');
+    }
+    #memory3 {
+      background-image: url('https://i.imgur.com/mZRcRQt.jpeg');
+    }
+    #memory4 {
+      background-image: url('https://i.imgur.com/yJvReDy.jpeg');
+    }
+    #memory5 {
+      background-image: url('https://i.imgur.com/ACPqST4.jpg');
+    }
+    #memory6 {
+      background-image: url('https://i.imgur.com/ZkEklYE.jpeg');
+    }
+    #memory7 {
+      background-image: url('https://i.imgur.com/s9Eb4VH.jpeg');
+    }
+    #memory8 {
+      background-image: url('https://i.imgur.com/j7TKjyR.jpeg');
+    }
+    #memory9 {
+      background-image: url('https://i.imgur.com/usuROCg.jpeg');
+    }
+    #memory10 {
+      background-image: url('https://i.imgur.com/sXmNmrd.jpeg');
+    }
+
+    .memory-frame {
+      width: 600px;
+      height: 400px;
+      border: 10px solid white;
+      border-radius: 5px;
+      margin-bottom: 30px;
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    }
+
+    .memory-text {
+      font-size: 2rem;
+      text-align: center;
+      max-width: 80%;
+      font-family: cursive;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .active-memory {
+      display: flex;
+    }
+  </style>
+</head>
+<body>
+  <!-- Initial Page -->
+  <div id="initial-page" class="page">
+    <h1 class="glowing-text">MADE JUST FOR YOU</h1>
+    <button id="reveal-button">Click to Reveal</button>
+    <div class="small-picture-frame"></div>
+  </div>
+
+  <!-- Slide 1: Music Slide -->
+  <div id="slide1" class="page hidden">
+    <h2>MUSIC? TURN UR VOLUME UP</h2>
+    <button id="music-button">Turn on Music</button>
+    <button id="next1" class="next-btn hidden">Next</button>
+    <div class="emoji-container">
+      <span class="emoji">🎵</span>
+      <span class="emoji">🎵</span>
+      <span class="emoji">🎵</span>
+      <span class="emoji">🎵</span>
+      <span class="emoji">🎵</span>
+      <span class="emoji">🎵</span>
+      <span class="emoji">🎵</span>
+      <span class="emoji">🎵</span>
+      <span class="emoji">🎵</span>
+      <span class="emoji">🎵</span>
+    </div>
+  </div>
+
+  <!-- New Slide Before Birthday Messages -->
+  <div id="new-before-birthday" class="page hidden">
+    <div class="fade-in" style="font-size: 3rem;">Before the birthday wishes...</div>
+    <div class="fade-in" style="font-size: 2rem; margin-top: 20px;">I want you to know how special you are</div>
+    <button id="new-before-birthday-next" class="next-btn">Continue</button>
+  </div>
+
+  <!-- Slide 2: Birthday Messages -->
+  <div id="slide2-1" class="page hidden">
+    <div id="message1" class="typewriter1">It's your birthday my love</div>
+    <button id="next2" class="next-btn">Next</button>
+  </div>
+
+  <div id="slide2-2" class="page hidden">
+    <div id="message2" class="typewriter1">Why not make it special?</div>
+    <button id="next3" class="next-btn">Next</button>
+  </div>
+
+  <div id="slide2-3" class="page hidden">
+    <div id="message3" class="typewriter1">So here I am with my typa present 💐</div>
+    <button id="next4" class="next-btn">Next</button>
+  </div>
+
+  <!-- Cake Page (Added before Slide 3) -->
+  <div id="cake-page" class="page hidden">
+    <div id="cake-container">
+      <div class="cake">
+        <div class="candle-container" id="candles-container"></div>
+      </div>
+      <div class="cake-bottom"></div>
+      <div id="birthday-message">Happy Birthday jaaan!💗</div>
+      <button id="cake-continue-btn">Continue</button>
+    </div>
+  </div>
+
+  <!-- Slide 3: Wishes -->
+  <div id="slide3-1" class="page hidden">
+    <div id="petals-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;"></div>
+    <div id="wish1" class="fade-in">Happy Birthday, Aminuu 🤌</div>
+    <button id="next5" class="next-btn">Next</button>
+  </div>
+
+  <div id="slide3-2" class="page hidden">
+    <div id="wish2" class="typewriter2">May this year be filled with happiness, success, and endless blessings</div>
+    <button id="next6" class="next-btn">Next</button>
+  </div>
+
+  <div id="slide3-3" class="page hidden">
+    <div id="wish3" class="typewriter2">May your heart always be at peace, and your days be filled with joy</div>
+    <button id="next7" class="next-btn">Next</button>
+  </div>
+
+  <div id="slide3-4" class="page hidden">
+    <div id="wish4" class="typewriter2">May all your dreams turn into reality and your efforts always be rewarded</div>
+    <button id="next8" class="next-btn">Next</button>
+  </div>
+
+  <div id="slide3-5" class="page hidden">
+    <div id="wish5" class="typewriter2">May you always be surrounded by love, kindness, and the best of people</div>
+    <button id="next9" class="next-btn">Next</button>
+  </div>
+
+  <div id="slide3-6" class="page hidden">
+    <div id="wish6" class="fade-in">May every step you take lead you closer to Allah, and by His grace, may all that you wish for come true</div>
+    <button id="next10" class="next-btn">Next</button>
+  </div>
+
+  <!-- Things I Don't Like Intro -->
+  <div id="dont-like-intro" class="page hidden">
+    <div class="memory-intro-text">Things I don't like about you...</div>
+    <button id="next11" class="next-btn">Next</button>
+  </div>
+
+  <!-- Things I Don't Like Slides -->
+  <div id="dont-like-1" class="page hidden">
+    <div class="dont-like-text">I  don't like how every time my heart races when I think of you, I know there's no one else I'd rather love </div>
+    <button id="next12" class="next-btn">Next</button>
+  </div>
+
+  <div id="dont-like-2" class="page hidden">
+    <div class="dont-like-text">I don't like how no one else compares to you, making everyone else seem ordinary</div>
+    <button id="next13" class="next-btn">Next</button>
+  </div>
+
+  <div id="dont-like-3" class="page hidden">
+    <div class="dont-like-text">I don't like how you keep your pain to yourself when I just want to hold you through it</div>
+    <button id="next14" class="next-btn">Next</button>
+  </div>
+
+  <div id="dont-like-4" class="page hidden">
+    <div class="dont-like-text">I don't like how you hide your sadness from me when I would do anything to make you smile again</div>
+    <button id="next15" class="next-btn">Next</button>
+  </div>
+
+  <div id="dont-like-5" class="page hidden">
+    <div class="dont-like-text">And most of all . I don't like how you think I could ever stop loving you, because that will never happen</div>
+    <button id="next16" class="next-btn">Next</button>
+  </div>
+
+  <!-- Memory Intro Slide -->
+  <div id="memories-intro" class="page hidden">
+    <div class="memory-intro-text">Things I love about you <3</div>
+    <button id="next17" class="next-btn">Next</button>
+  </div>
+
+  <!-- Memory Slides -->
+  <div id="memories-container" class="page hidden">
+    <div class="memory-content active-memory" id="memory1">
+      <div class="memory-frame" style="background-image: url('https://i.imgur.com/iPLnnj3.jpg');"></div>
+      <div class="memory-text">Your eyes hold a universe I could get lost in forever</div>
+      <button class="next-btn memory-next">Next</button>
+    </div>
+    
+    <div class="memory-content" id="memory2">
+      <div class="memory-frame" style="background-image: url('https://i.imgur.com/xLIn3iN.png');"></div>
+      <div class="memory-text">Your smile is proof that even in my worst moments, there is still something worth holding on to</div>
+      <button class="next-btn memory-next">Next</button>
+    </div>
+    
+    <div class="memory-content" id="memory3">
+      <div class="memory-frame" style="background-image: url('https://i.imgur.com/X5Uje2i.jpg');"></div>
+      <div class="memory-text">Your voice is my favorite sound, not because of the words, but because it's yours</div>
+      <button class="next-btn memory-next">Next</button>
+    </div>
+    
+    <div class="memory-content" id="memory4">
+      <div class="memory-frame" style="background-image: url('https://i.imgur.com/X0ew46S.jpeg');"></div>
+      <div class="memory-text">With you... I don't just exist, I feel truly alive</div>
+      <button class="next-btn memory-next">Next</button>
+    </div>
+    
+    <div class="memory-content" id="memory5">
+      <div class="memory5-text ">But more than that I need you to know</div>
+      <button class="next-btn memory-next">Next</button>
+    </div>
+    
+    <div class="memory-content" id="memory6">
+      <div class="memory-frame" style="background-image: url('https://i.imgur.com/Y72x5Dh.jpeg');"></div>
+      <div class="memory-text">You are not just someone I love... you are the one I will always stand beside, no matter what</div>
+      <button class="next-btn memory-next">Next</button>
+    </div>
+    
+    <div class="memory-content" id="memory7">
+      <div class="memory-frame" style="background-image: url('https://i.imgur.com/Gjt9tKj.jpeg');"></div>
+      <div class="memory-text">Your fears... don't scare me away. I will face them with you, every single time</div>
+      <button class="next-btn memory-next">Next</button>
+    </div>
+    
+    <div class="memory-content" id="memory8">
+      <div class="memory-frame" style="background-image: url('https://i.imgur.com/S5EPnso.jpeg');"></div>
+      <div class="memory-text">When you feel alone... remember, I will always be here, in every way that matters</div>
+      <button class="next-btn memory-next">Next</button>
+    </div>
+    
+    <div class="memory-content" id="memory9">
+      <div class="memory-frame" style="background-image: url('https://i.imgur.com/GMqa59q.jpg');"></div>
+      <div class="memory-text">If you ever doubt how much I care, just look beside you . I will always be there</div>
+      <button class="next-btn memory-next">Next</button>
+    </div>
+    
+    <div class="memory-content" id="memory10">
+      <div class="memory-frame" style="background-image: url('https://i.imgur.com/iPLnnj3.jpg');"></div>
+      <div class="memory-text">Whatever life brings you'll never have to face it alone, not as long as I'm breathing</div>
+      <button class="next-btn memory-next">Next</button>
+    </div>
+  </div>
+
+  <script>
+    // Initial Page
+    document.getElementById('reveal-button').addEventListener('click', () => {
+      document.getElementById('initial-page').classList.add('hidden');
+      document.getElementById('slide1').classList.remove('hidden');
+    });
+
+    // Slide 1: Music Slide
+    document.getElementById('music-button').addEventListener('click', () => {
+      // Add music functionality here
+      document.getElementById('next1').classList.remove('hidden');
+    });
+
+    document.getElementById('next1').addEventListener('click', () => {
+      document.getElementById('slide1').classList.add('hidden');
+      document.getElementById('new-before-birthday').classList.remove('hidden');
+    });
+
+    // New Slide Before Birthday Messages
+    document.getElementById('new-before-birthday-next').addEventListener('click', () => {
+      document.getElementById('new-before-birthday').classList.add('hidden');
+      document.getElementById('slide2-1').classList.remove('hidden');
+      typeWriter(document.getElementById('message1'));
+    });
+
+    // Slide 2: Birthday Messages
+    document.getElementById('next2').addEventListener('click', () => {
+      document.getElementById('slide2-1').classList.add('hidden');
+      document.getElementById('slide2-2').classList.remove('hidden');
+      typeWriter(document.getElementById('message2'));
+    });
+
+    document.getElementById('next3').addEventListener('click', () => {
+      document.getElementById('slide2-2').classList.add('hidden');
+      document.getElementById('slide2-3').classList.remove('hidden');
+      typeWriter(document.getElementById('message3'));
+    });
+
+    // Changed this to go to cake page instead of slide3-1
+    document.getElementById('next4').addEventListener('click', () => {
+      document.getElementById('slide2-3').classList.add('hidden');
+      document.getElementById('cake-page').classList.remove('hidden');
+      createCakeWithCandles();
+    });
+
+    // Cake Page Functionality
+    function createCakeWithCandles() {
+      const candlesContainer = document.getElementById('candles-container');
+      const numberOfCandles = 10;
+      let candlesBlownOut = 0;
+      
+      // Create candles
+      for (let i = 0; i < numberOfCandles; i++) {
+        const candle = document.createElement('div');
+        candle.className = 'candle';
+        candle.style.left = `${(i + 1) * (100 / (numberOfCandles + 1))}%`;
+        
+        const flame = document.createElement('div');
+        flame.className = 'flame';
+        
+        candle.appendChild(flame);
+        candlesContainer.appendChild(candle);
+        
+        // Add click event to blow out candle
+        candle.addEventListener('click', function() {
+          if (!this.classList.contains('candle-off')) {
+            this.classList.add('candle-off');
+            candlesBlownOut++;
+            
+            // Check if all candles are blown out
+            if (candlesBlownOut === numberOfCandles) {
+              setTimeout(() => {
+                document.getElementById('birthday-message').classList.add('visible');
+                createConfetti();
+                setTimeout(() => {
+                  document.getElementById('cake-continue-btn').classList.add('visible');
+                }, 1000);
+              }, 500);
+            }
+          }
+        });
+      }
+    }
+    
+    function createConfetti() {
+      const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+      const container = document.getElementById('cake-container');
+      
+      for (let i = 0; i < 500; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.left = `${Math.random() * 100}%`;
+        confetti.style.top = '-10px';
+        confetti.style.opacity = '1';
+        confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+        
+        // Random shape
+        if (Math.random() > 0.5) {
+          confetti.style.borderRadius = '50%';
+        } else {
+          confetti.style.width = `${Math.random() * 10 + 5}px`;
+          confetti.style.height = `${Math.random() * 5 + 2}px`;
+        }
+        
+        container.appendChild(confetti);
+        
+        // Animation
+        const animationDuration = Math.random() * 3 + 2;
+        confetti.style.animation = `fall ${animationDuration}s linear forwards`;
+        confetti.style.animationDelay = `${Math.random() * 2}s`;
+        
+        // Keyframes for falling animation
+        const keyframes = `
+          @keyframes fall {
+            to {
+              transform: translateY(100vh) rotate(${Math.random() * 360}deg);
+              opacity: 0;
+            }
+          }
+        `;
+        
+        // Add keyframes if not already added
+        if (!document.getElementById('confetti-animation')) {
+          const style = document.createElement('style');
+          style.id = 'confetti-animation';
+          style.innerHTML = keyframes;
+          document.head.appendChild(style);
+        }
+      }
+    }
+    
+    // Continue button on cake page now goes to slide3-1
+    document.getElementById('cake-continue-btn').addEventListener('click', () => {
+      document.getElementById('cake-page').classList.add('hidden');
+      document.getElementById('slide3-1').classList.remove('hidden');
+      fadeIn(document.getElementById('wish1'));
+      createCherryBlossomPetals();
+    });
+
+    // Slide 3: Wishes
+    document.getElementById('next5').addEventListener('click', () => {
+      document.getElementById('slide3-1').classList.add('hidden');
+      document.getElementById('slide3-2').classList.remove('hidden');
+      typeWriter(document.getElementById('wish2'));
+    });
+
+    document.getElementById('next6').addEventListener('click', () => {
+      document.getElementById('slide3-2').classList.add('hidden');
+      document.getElementById('slide3-3').classList.remove('hidden');
+      typeWriter(document.getElementById('wish3'));
+    });
+
+    document.getElementById('next7').addEventListener('click', () => {
+      document.getElementById('slide3-3').classList.add('hidden');
+      document.getElementById('slide3-4').classList.remove('hidden');
+      typeWriter(document.getElementById('wish4'));
+    });
+
+    document.getElementById('next8').addEventListener('click', () => {
+      document.getElementById('slide3-4').classList.add('hidden');
+      document.getElementById('slide3-5').classList.remove('hidden');
+      typeWriter(document.getElementById('wish5'));
+    });
+
+    document.getElementById('next9').addEventListener('click', () => {
+      document.getElementById('slide3-5').classList.add('hidden');
+      document.getElementById('slide3-6').classList.remove('hidden');
+      fadeIn(document.getElementById('wish6'));
+    });
+
+    document.getElementById('next10').addEventListener('click', () => {
+      document.getElementById('slide3-6').classList.add('hidden');
+      document.getElementById('dont-like-intro').classList.remove('hidden');
+    });
+
+    // Things I Don't Like Slides
+    document.getElementById('next11').addEventListener('click', () => {
+      document.getElementById('dont-like-intro').classList.add('hidden');
+      document.getElementById('dont-like-1').classList.remove('hidden');
+    });
+
+    document.getElementById('next12').addEventListener('click', () => {
+      document.getElementById('dont-like-1').classList.add('hidden');
+      document.getElementById('dont-like-2').classList.remove('hidden');
+    });
+
+    document.getElementById('next13').addEventListener('click', () => {
+      document.getElementById('dont-like-2').classList.add('hidden');
+      document.getElementById('dont-like-3').classList.remove('hidden');
+    });
+
+    document.getElementById('next14').addEventListener('click', () => {
+      document.getElementById('dont-like-3').classList.add('hidden');
+      document.getElementById('dont-like-4').classList.remove('hidden');
+    });
+
+    document.getElementById('next15').addEventListener('click', () => {
+      document.getElementById('dont-like-4').classList.add('hidden');
+      document.getElementById('dont-like-5').classList.remove('hidden');
+    });
+
+    document.getElementById('next16').addEventListener('click', () => {
+      document.getElementById('dont-like-5').classList.add('hidden');
+      document.getElementById('memories-intro').classList.remove('hidden');
+    });
+
+    // Memory Intro Slide
+    document.getElementById('next17').addEventListener('click', () => {
+      document.getElementById('memories-intro').classList.add('hidden');
+      document.getElementById('memories-container').classList.remove('hidden');
+    });
+
+    // Memory Slides Navigation
+    let currentMemory = 1;
+    const totalMemories = 10;
+    
+    // Add event listeners to all memory next buttons
+    const memoryNextButtons = document.querySelectorAll('.memory-next');
+    memoryNextButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Hide current memory
+        document.getElementById(`memory${currentMemory}`).classList.remove('active-memory');
+        
+        // Move to next memory or end
+        if (currentMemory < totalMemories) {
+          currentMemory++;
+          document.getElementById(`memory${currentMemory}`).classList.add('active-memory');
+        } else {
+          // All memories shown, show final message
+          alert("Happy Birthday! I hope you liked this little gift. ❤️");
+          // You could also reset to the first memory if you want it to loop
+          currentMemory = 1;
+          document.getElementById(`memory${currentMemory}`).classList.add('active-memory');
+        }
+      });
+    });
+
+    // Helper Functions
+    function typeWriter(element) {
+      const text = element.textContent;
+      element.textContent = '';
+      element.style.display = 'inline-block';
+      let i = 0;
+      const interval = setInterval(() => {
+        if (i < text.length) {
+          element.textContent += text.charAt(i);
+          i++;
+        } else {
+          clearInterval(interval);
+        }
+      }, 100);
+    }
+
+    function fadeIn(element) {
+      element.style.opacity = 0;
+      let opacity = 0;
+      const interval = setInterval(() => {
+        if (opacity < 1) {
+          opacity += 0.1;
+          element.style.opacity = opacity;
+        } else {
+          clearInterval(interval);
+        }
+      }, 100);
+    }
+
+    // Cherry Blossom Petals Animation
+    function createCherryBlossomPetals() {
+      const petalsContainer = document.getElementById('petals-container');
+      for (let i = 0; i < 200; i++) {
+        const petal = document.createElement('div');
+        petal.classList.add('petal');
+        petal.style.left = `${Math.random() * 100}vw`;
+        petal.style.animationDuration = `${Math.random() * 5 + 5}s`;
+        petal.style.animationDelay = `${Math.random() * 5}s`;
+        petalsContainer.appendChild(petal);
+      }
+    }
+  </script>
+</body>
+</html>><ALOASK-SEPARATE-EDITORS>
+.typewriter {
+  font-size: 2rem;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0 auto;
+  letter-spacing: 0.15em;
+  color: black;
+  display: inline-block;
+  border-right: 2px solid white;
+  animation: blink-caret 0.75s step-end infinite;
+}
+.typewriter2 {
+  font-size: 2rem;
+  overflow: hidden;
+  white-space: pre-wrap;
+  margin: 0 auto;
+  letter-spacing: 0.15em;
+  color: whi;
+  display: inline-block;
+  border-right: 2px solid white;
+  animation: blink-caret 0.75s step-end infinite;
+}
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink-caret {
+  from, to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: white;
+  }
+}
+.page {
+  background-size: 100% 100%; /* Stretches the image to fit the slide */
+}
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    background-color: #000;
+}
+
+
+canvas {
+    display: block;
+}
+/* Updated Next Button for Music Slide */
+#slide1 .next-button {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  padding: 15px 30px; /* Increased padding for a bigger button */
+  font-size: 1.5rem; /* Increased font size */
+  background-color: white; /* White background */
+  border: 2px solid white; /* White border */
+  color: black; /* Black text for contrast */
+  cursor: pointer;
+  border-radius: 5px; /* Optional: Adds rounded corners */
+  transition: background-color 0.3s, color 0.3s; /* Smooth hover effect */
+}
+
+#slide1 .next-button:hover {
+  background-color: transparent; /* Transparent background on hover */
+  color: gray; /* Text color changes to white on hover */
+}
+ @keyframes fall {
+  0% {
+    transform: translateY(-100%) translateX(0);
+  }
+  50% {
+    transform: translateY(50vh) translateX(60px); /* Sway to the right */
+  }
+  100% {
+    transform: translateY(100vh) translateX(0);
+  }
+}<ALOASK-SEPARATE-EDITORS>
